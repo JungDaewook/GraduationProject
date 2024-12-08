@@ -11,6 +11,8 @@ import secondProjectContent from "../Images/second-project-content.png";
 import thirdProjectContent from "../Images/third-project-content.png";
 import {useLocation} from "react-router-dom";
 import {FaArrowRight, FaArrowLeft} from "react-icons/fa";
+import gptWrapperBackground from "../Images/gpt-wrapper-background.png";
+import LoadingIcon from "./LoadingIcon";
 
 // import Image
 
@@ -42,6 +44,7 @@ function EntireContainer(props) {
 
     const [resultMessage, setResultMessage] = useState("");
     const [inputQuestion, setInputQuestion] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const buttonTeachingOnclick = useCallback(async () => {
         const result = await getGPTResponseByApi([
@@ -67,8 +70,16 @@ function EntireContainer(props) {
         setResultMessage(result);  // 결과를 비동기 처리 후 상태에 저장
     }, [])
 
+    // useEffect(() => {
+    //         if (!resultMessage) {
+    //             setIsLoading(true);
+    //         }
+    //     }, [resultMessage]
+    // )
+
     const buttonAskingOnclick = useCallback(async (questionInput) => {
         if (questionInput) {
+            setIsLoading(true);
             const result = await getGPTResponseByApi([
                 {role: "system", content: "넌 지금부터 내 포트폴리오 전용 비서야. 내가 포트폴리오를 텍스트로 제공할 거야. 넌 그걸 학습하고 질문에 답변해주면 돼."},
                 {role: "system", content: "자 이제 내 포트폴리오를 알려줄게"},
@@ -91,8 +102,9 @@ function EntireContainer(props) {
                 // {role: "assistant", content: "내 강점은 뭐라고 생각해?"},
             ]);
             setResultMessage(result);  // 결과를 비동기 처리 후 상태에 저장
+            setIsLoading(false);
         } else {
-            setResultMessage("질문을 입력해주세요.")
+            alert("질문을 입력주세요.")
         }
     }, [])
 
@@ -175,21 +187,29 @@ function EntireContainer(props) {
                     </div>
                 </div>
             )}
-            {!isDetailVisible && <div className="gpt-wrapper-test">gpt 래퍼</div>}
-            {/*<div className="gpt-wrapper">*/}
-            {/*    <div className="input-wrapper">*/}
-            {/*        <div className={"button teaching"} onClick={buttonTeachingOnclick}>학습버튼</div>*/}
-            {/*        <div className="input-box">질문을 입력하세요.</div>*/}
-            {/*        <input value={inputQuestion} onChange={(e) => {*/}
-            {/*            setInputQuestion(e.target.value)*/}
-            {/*        }} placeholder={"질문을 입력하세요."}/>*/}
-            {/*        <div className={"button asking"} onClick={() => {*/}
-            {/*            buttonAskingOnclick(inputQuestion)*/}
-            {/*        }}>물어보기*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div className="result-wrapper">{resultMessage}</div>*/}
-            {/*</div>*/}
+            {/*{!isDetailVisible && <div className="gpt-wrapper-test">gpt 래퍼</div>}*/}
+            <div className="gpt-wrapper">
+                <div className="background-image">
+                    <img className={"background-image-cover"} src={gptWrapperBackground}/>
+                </div>
+                <div className="description">
+                    정대욱 지원자에 대해 무엇이든 물어보세요!
+                    <br/>AI가 친절하게 답변해줄 거예요!
+                </div>
+                <div className="input-wrapper">
+                    <input className={"input-box"} value={inputQuestion} onChange={(e) => {
+                        setInputQuestion(e.target.value)
+                    }} placeholder={"질문을 입력하세요."}/>
+                    <div className={"button asking"} onClick={() => {
+                        buttonAskingOnclick(inputQuestion)
+                    }}>물어보기
+                    </div>
+                </div>
+                {isLoading ? <div className={"loading-result-wrapper"}>
+                    <LoadingIcon/>
+                </div> : <div className="result-wrapper">
+                    {resultMessage ? resultMessage : "무엇이 궁금하신가요?"}</div>}
+            </div>
         </div>
     );
 }

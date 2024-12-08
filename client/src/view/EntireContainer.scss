@@ -138,53 +138,98 @@
 
 
   .gpt-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    .background-image {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.3;
+
+      .background-image-cover {
+        width: 100%;
+        height: 100vh;
+      }
+    }
+
+    .description {
+      padding: 40px;
+      font-size: 50px;
+    }
+
     .input-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 10px;
-      //background-color: red;
+      width: 100%;
+
+      .input-box {
+        width: 50%;
+        height: 50px;
+        margin: 0 20px;
+        font-size: 20px;
+        padding: 0px 10px;
+        border-radius: 10px;
+        border: 1px solid gray;
+      }
 
       .button {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100px;
-        height: 100px;
-        margin: 10px;
-        background-color: blue;
+        font-size: 20px;
+        height: 30px;
+        background-color: #0351FF;
+        padding: 10px;
         color: white;
-        border-radius: 5px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 0 20px 0 0;
 
         &:hover {
-          cursor: pointer;
-        }
-      }
-
-
-      input {
-        width: 346px;
-        padding: 17px 22px;
-        border: 2px solid #E9EBED;
-        background: #FFFFFF;
-        outline: none;
-        margin-top: 10px;
-
-        &:focus {
-          border: 2px solid #0351FF;
-        }
-
-        &::placeholder {
-          color: #AAB6CA;
+          background-color: lightblue;
         }
       }
     }
 
     .result-wrapper {
-      //width: 100%;
-      height: 1000px;
-      border: 1px solid #282c34;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 60%;
+      height: 600px;
+      background-color: white;
       margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid gray;
+      text-align: left;
+      position: relative;
+    }
+
+    .loading-result-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60%;
+      height: 600px;
+      background-color: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid gray;
+      text-align: left;
+      position: relative;
     }
   }
 }
