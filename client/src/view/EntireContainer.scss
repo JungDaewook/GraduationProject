@@ -1,0 +1,102 @@
+#EntireContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 500vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+
+  .header-wrapper,
+  .project-wrapper,
+  .gpt-wrapper-test {
+    scroll-snap-align: start;
+    width: 100%;
+    //height: 100vh;
+    flex: 1; // 각 섹션이 동일한 높이를 가지도록 설정
+    display: flex;
+    justify-content: center;
+    align-items: center; // 내용 가운데 정렬
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    //background-color: red;
+    .header-image {
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+
+  .project-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+  }
+
+  .gpt-wrapper-test {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+  }
+
+
+  .gpt-wrapper {
+    .input-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      //background-color: red;
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        background-color: blue;
+        color: white;
+        border-radius: 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+
+      input {
+        width: 346px;
+        padding: 17px 22px;
+        border: 2px solid #E9EBED;
+        background: #FFFFFF;
+        outline: none;
+        margin-top: 10px;
+
+        &:focus {
+          border: 2px solid #0351FF;
+        }
+
+        &::placeholder {
+          color: #AAB6CA;
+        }
+      }
+    }
+
+    .result-wrapper {
+      //width: 100%;
+      height: 1000px;
+      border: 1px solid #282c34;
+      margin: 20px;
+    }
+  }
+}
+
